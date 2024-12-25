@@ -20,6 +20,6 @@ public class Main{
 
     frame.setLocationRelativeTo(null); // Centers frame
     frame.setVisible(true); // Sets screen visible
-        
+
     }
 }

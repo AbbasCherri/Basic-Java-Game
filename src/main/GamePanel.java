@@ -27,10 +27,6 @@ public class GamePanel extends JPanel implements Runnable {
     // Default SPEED
     final int SPEED = 6;
 
-    // Default ACCELERATION
-    final int ACCELERATION = 10;
-
-
     public GamePanel() {
         this.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
         this.setBackground(Color.BLACK);
@@ -52,56 +48,47 @@ public class GamePanel extends JPanel implements Runnable {
         long lastTime = System.nanoTime(); // Saves the last time function was called
         double delta = 0; // Sets the delta time to zero
         long currentTime; // Initializes the currentTime
-        int frames = 0;
-        long timer = 0;
+        int frames = 0; // FPS counter
+        long timer = 0; // FPS display per second
     while (gameThread.isAlive()) {
-        // System.out.println("Game thread running");
+            // System.out.println("Game thread running");
 
-        currentTime = System.nanoTime(); // Gets the current Time
+            currentTime = System.nanoTime(); // Gets the current Time
 
-        /*
-        Calculates the Delta.
-        The delta is the currentTime - lastTime / the drawInterval
+            delta += (currentTime - lastTime) / drawInterval; // Calculates DeltaTime
+            timer += (currentTime - lastTime); // Timer responsible for the FPS display
+            lastTime = currentTime; // Sets the last time to the next time
 
-         */
-        delta += (currentTime - lastTime) / drawInterval;
-        timer += (currentTime - lastTime);
-        lastTime = currentTime; // Sets the last time to the next time
+            if (delta >= 1) {
+                update();
+                repaint();
+                delta--;
+                frames++;
+            }
 
-
-        if (delta >= 1) {
-            update();
-            repaint();
-            delta--;
-            frames++;
+            // Displays FPS
+            if (timer >= 1000000000) {
+                System.out.println("FPS: " + frames);
+                timer = 0;
+                frames = 0;
+            }
         }
-
-        if (timer >= 1000000000) {
-            System.out.println("FPS: " + frames);
-            timer = 0;
-            frames = 0;
-        }
-
-
-
-
-    }
     }
 
     // Checks
     public void update() {
-    if(input.upPressed) {
-        playerY -= SPEED;
-    }
-    if(input.downPressed) {
-        playerY += SPEED;
-    }
-    if(input.leftPressed) {
-        playerX -= SPEED;
-    }
-    if(input.rightPressed) {
-        playerX += SPEED;
-    }
+        if(input.upPressed) {
+            playerY -= SPEED;
+        }
+        if(input.downPressed) {
+            playerY += SPEED;
+        }
+        if(input.leftPressed) {
+            playerX -= SPEED;
+        }
+        if(input.rightPressed) {
+            playerX += SPEED;
+        }
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -110,5 +97,4 @@ public class GamePanel extends JPanel implements Runnable {
         g2d.fillRect(playerX, playerY, GAME_SIZE,GAME_SIZE);
         g2d.dispose();
     }
-
 }
