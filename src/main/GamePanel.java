@@ -1,14 +1,17 @@
 package main;
 
+import Entity.Player;
+
 import javax.swing.JPanel;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
+
     // SCREEN SETTINGS
     final int ORIGINAL_SIZE = 16; // Game asset size
     final int SCALE = 3; // Scaling Size
 
-    final int GAME_SIZE = ORIGINAL_SIZE * SCALE; // Game Size == 48
+    public final int GAME_SIZE = ORIGINAL_SIZE * SCALE; // Game Size == 48
     final int MAX_COLS = 16; // Number of columns int Tiles
     final int MAX_ROWS = 12; // Number of rows in Tiles
     final int GAME_WIDTH = MAX_COLS * GAME_SIZE; // Pixel Width
@@ -16,16 +19,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     Thread gameThread;
     InputHandler input = new InputHandler();
-
+    Player player = new Player(this, input);
 
     // FPS
     final int FPS = 60;
-
-    // Default pos
-    int playerX = 100, playerY = 100;
-
-    // Default SPEED
-    final int SPEED = 6;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
@@ -77,24 +74,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     // Checks
     public void update() {
-        if(input.upPressed) {
-            playerY -= SPEED;
-        }
-        if(input.downPressed) {
-            playerY += SPEED;
-        }
-        if(input.leftPressed) {
-            playerX -= SPEED;
-        }
-        if(input.rightPressed) {
-            playerX += SPEED;
-        }
+        player.update();
+
     }
+    // Draw calls
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(playerX, playerY, GAME_SIZE,GAME_SIZE);
+        player.draw(g2d);
         g2d.dispose();
     }
 }
