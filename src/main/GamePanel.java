@@ -56,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
             timer += (currentTime - lastTime); // Timer responsible for the FPS display
             lastTime = currentTime; // Sets the last time to the next time
 
+            // Checks for when to next draw call
             if (delta >= 1) {
                 update();
                 repaint();
