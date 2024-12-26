@@ -6,7 +6,6 @@ import main.InputHandler;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -62,6 +61,7 @@ public class Player extends Entity {
 
     public void getPlayerImage(){
         try{
+            // Loads the player sprites
             up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Player/WalkingSprite/boy_up_1.png")));
             up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Player/WalkingSprite/boy_up_2.png")));
             right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Player/WalkingSprite/boy_right_1.png")));
@@ -107,7 +107,7 @@ public class Player extends Entity {
                     Image = right2;
                 }
                 break;
-        };
+        }
         g2d.drawImage(Image, x, y, gp.GAME_SIZE, gp.GAME_SIZE,  null);
     }
 }
