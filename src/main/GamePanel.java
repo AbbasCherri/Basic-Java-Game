@@ -14,15 +14,16 @@ public class GamePanel extends JPanel implements Runnable {
     final int SCALE = 3; // Scaling Size
 
     public final int GAME_SIZE = ORIGINAL_SIZE * SCALE; // Game Size == 48
-    final int MAX_COLS = 16; // Number of columns int Tiles
-    final int MAX_ROWS = 12; // Number of rows in Tiles
-    final int GAME_WIDTH = MAX_COLS * GAME_SIZE; // Pixel Width 768
-    final int GAME_HEIGHT = MAX_ROWS * GAME_SIZE; // Pixel Height 576
+    public final int MAX_COLS = 16; // Number of columns int Tiles
+    public final int MAX_ROWS = 12; // Number of rows in Tiles
+    public final int GAME_WIDTH = MAX_COLS * GAME_SIZE; // Pixel Width 768
+    public final int GAME_HEIGHT = MAX_ROWS * GAME_SIZE; // Pixel Height 576
 
     Thread gameThread;
     InputHandler input = new InputHandler();
     Player player = new Player(this, input);
-    TileManager grid = new TileManager();
+    TileManager tile = new TileManager(this);
+
 
     // FPS
     final int FPS = 60;
@@ -86,7 +87,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-         grid.drawGrid(g2d);
+        tile.drawMap(g2d);
         player.draw(g2d);
         g2d.dispose();
     }

@@ -1,41 +1,59 @@
 package Tiles;
 
+import main.GamePanel;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-// ToDo Grid System
-
 
 public class TileManager {
 
-    BufferedImage tileSprite;
-    BufferedImage grass, wall, water;
 
 
-    // Total Screen of 16x12
-    // 16 cols
-    // 12 rows
+    int assetNumber = 3;
+    GamePanel gamePanel;
+    BufferedImage[] assets = new BufferedImage[assetNumber];
 
-    public void drawGrid(Graphics2D g2d) {
-        g2d.drawLine(200, 200, 400, 400);
-    }
+    public TileManager(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
 
-
-    public void draw(Graphics2D g2d, int x, int y, BufferedImage image) {
-        g2d.drawImage(image, x, y, null);
-    }
-
-    // methode for setting the tile types
-    public void setTileType(BufferedImage image, String tilePath) throws IOException {
         try{
-        tileSprite = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/"+tilePath)));;
-        }catch(IOException e){
+            assets[0] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/grass.png")));
+            assets[1] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/wall.png")));
+            assets[2] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/water.png")));
+        }catch (IOException e){
             e.printStackTrace();
         }
+
     }
+
+    public void drawMap(Graphics2D g2d){
+        int row = 0;
+        int col = 0;
+        int x = 0;
+        int y = 0;
+
+        while (row < gamePanel.GAME_WIDTH || col < gamePanel.GAME_HEIGHT){
+            g2d.drawImage(assets[0], x, y, null);
+            col++;
+            x += gamePanel.GAME_SIZE;
+
+            if (col+1 == gamePanel.GAME_WIDTH){
+                col = 0;
+                row++;
+                y += gamePanel.GAME_SIZE;
+                x = 0;
+            }
+        }
+
+    }
+
+
+
+
 
 
 }
