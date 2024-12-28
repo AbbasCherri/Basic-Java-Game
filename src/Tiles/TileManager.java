@@ -69,12 +69,12 @@ public class TileManager {
     }
 
 
-    public void drawMap(Graphics2D g2d){
+    public void drawMap(Graphics2D g2d, String mapName){
         int row = 0;
         int col = 0;
         int x = 0;
         int y = 0;
-        int [][] map = readMap("res/Maps/mapTest.txt");
+        int [][] map = readMap("res/Maps/" + mapName +".txt");
 
         while ((row < gamePanel.MAX_ROWS)) {
             g2d.drawImage(assets[map[row][col]], x, y, null);
