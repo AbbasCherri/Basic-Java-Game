@@ -1,11 +1,10 @@
 package main;
 
 import javax.swing.JFrame;
-import java.io.IOException;
 
 
 public class Main{
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
     JFrame frame = new JFrame();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
