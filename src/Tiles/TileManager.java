@@ -26,6 +26,7 @@ public class TileManager {
         this.gamePanel = gamePanel;
 
         try{
+            // load assets
             assets[0] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/grass.png")));
             assets[1] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/wall.png")));
             assets[2] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/water.png")));
@@ -49,7 +50,11 @@ public class TileManager {
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
                 String[] split = line.split(" ");
-                tile[i][i] = Integer.parseInt(split[i]);
+                int[] intSplit = new int[split.length];
+                for (int j = 0; j < split.length; j++) {
+                    intSplit[j] = Integer.parseInt(split[j]);
+                }
+                tile[i] = intSplit;
                 i++;
             }
             reader.close();
