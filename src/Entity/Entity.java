@@ -3,10 +3,11 @@ package Entity;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity {
-    public int x, y;
+    public double x, y;
     public int speed;
+    final public double GRAVITY = 1.3;
 
-    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+    public BufferedImage idle, up;
     public String direction;
 
     public int spriteCounter = 0;

@@ -27,6 +27,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // FPS
     final int FPS = 60;
+    public double delta;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
@@ -47,7 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void run() {
         double drawInterval = (double) 1000000000 / FPS; // Desired Draw Interval
         long lastTime = System.nanoTime(); // Saves the last time function was called
-        double delta = 0; // Sets the delta time to zero
+        delta = 0; // Sets the delta time to zero
         long currentTime; // Initializes the currentTime
         int frames = 0; // FPS counter
         long timer = 0; // FPS display per second

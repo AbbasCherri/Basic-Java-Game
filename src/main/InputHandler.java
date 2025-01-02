@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 public class InputHandler implements KeyListener {
     public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean jet;
 
     public boolean isMoving(){
         return upPressed || downPressed || leftPressed || rightPressed;
@@ -29,6 +30,9 @@ public class InputHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_D){
         rightPressed = true;
+        }
+        if (code == KeyEvent.VK_SPACE){
+            jet = true;
         }
     }
 
